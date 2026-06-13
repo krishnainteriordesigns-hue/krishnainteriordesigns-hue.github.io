@@ -1,0 +1,2644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Krishna Interiors — Design · Decor · Style</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Outfit:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #141e2c;
+      --ink-soft: #22304a;
+      --paper: #fafaf8;
+      --paper-warm: #f4f3ee;
+      --red: #e23a36;
+      --blue: #1d9bd8;
+      --gold: #f2a71b;
+      --stone: #76808f;
+      --line: #e3e2dc;
+      --display: 'Fraunces', serif;
+      --body: 'Outfit', sans-serif;
+      --max: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: var(--body);
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    ::selection {
+      background: var(--gold);
+      color: var(--ink)
+    }
+
+    /* ---------- Ribbon motif ---------- */
+    .ribbon {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
+      width: 64px
+    }
+
+    .ribbon span {
+      height: 4px;
+      border-radius: 2px;
+      transform-origin: left
+    }
+
+    .ribbon span:nth-child(1) {
+      background: var(--blue);
+      width: 100%
+    }
+
+    .ribbon span:nth-child(2) {
+      background: var(--red);
+      width: 72%
+    }
+
+    .ribbon span:nth-child(3) {
+      background: var(--gold);
+      width: 46%
+    }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(250, 250, 248, .86);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line);
+      transition: box-shadow .3s;
+    }
+
+    nav.scrolled {
+      box-shadow: 0 8px 30px rgba(20, 30, 44, .07)
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 32px;
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--ink)
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 42px;
+      flex: none
+    }
+
+    .brand-img {
+      object-fit: contain
+    }
+
+    /* ---------- Our Work / Gallery ---------- */
+    .filters {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 36px
+    }
+
+    .fbtn {
+      border: 1.5px solid var(--line);
+      background: #fff;
+      border-radius: 99px;
+      padding: 9px 20px;
+      font-family: var(--body);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink-soft);
+      cursor: pointer;
+      transition: all .25s;
+      letter-spacing: .3px;
+    }
+
+    .fbtn:hover {
+      border-color: var(--ink);
+      transform: translateY(-2px)
+    }
+
+    .fbtn.active {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink)
+    }
+
+    .gallery-grid {
+      columns: 3;
+      column-gap: 20px;
+    }
+
+    .gitem {
+      break-inside: avoid;
+      margin-bottom: 20px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      background: var(--paper-warm);
+      border: 1px solid var(--line);
+      transition: transform .35s, box-shadow .35s;
+    }
+
+    .gitem:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 48px rgba(20, 30, 44, .16)
+    }
+
+    .gitem img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: transform .6s cubic-bezier(.22, 1, .36, 1)
+    }
+
+    .gitem:hover img {
+      transform: scale(1.04)
+    }
+
+    .gitem .cap {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 36px 20px 16px;
+      color: #fff;
+      background: linear-gradient(transparent, rgba(16, 24, 36, .85));
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity .35s, transform .35s;
+    }
+
+    .gitem:hover .cap {
+      opacity: 1;
+      transform: none
+    }
+
+    .gitem .cap .ct {
+      font-weight: 600;
+      font-size: 15.5px
+    }
+
+    .gitem .cap .cc {
+      font-size: 12px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 600
+    }
+
+    .gitem.hidden {
+      display: none
+    }
+
+    .gallery-empty {
+      border: 2px dashed var(--line);
+      border-radius: 22px;
+      padding: 70px 40px;
+      text-align: center;
+      background: #fff;
+    }
+
+    .gallery-empty h3 {
+      font-size: 26px;
+      margin-bottom: 12px
+    }
+
+    .gallery-empty p {
+      color: var(--stone);
+      max-width: 560px;
+      margin: 0 auto;
+      font-size: 15.5px
+    }
+
+    .gallery-empty code {
+      background: var(--paper-warm);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 2px 9px;
+      font-size: 13.5px;
+      color: var(--red);
+    }
+
+    /* lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(13, 19, 29, .94);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      backdrop-filter: blur(6px);
+    }
+
+    .lightbox.open {
+      display: flex;
+      animation: pageIn .3s
+    }
+
+    .lightbox img {
+      max-width: 100%;
+      max-height: 82vh;
+      border-radius: 14px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, .6)
+    }
+
+    .lb-cap {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: #cfd8e4;
+      font-size: 15px
+    }
+
+    .lb-cap b {
+      color: #fff;
+      font-weight: 600
+    }
+
+    .lb-close,
+    .lb-prev,
+    .lb-next {
+      position: absolute;
+      background: rgba(255, 255, 255, .1);
+      border: 1px solid rgba(255, 255, 255, .2);
+      color: #fff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 20px;
+      display: grid;
+      place-items: center;
+      transition: background .25s;
+      font-family: var(--body);
+    }
+
+    .lb-close:hover,
+    .lb-prev:hover,
+    .lb-next:hover {
+      background: rgba(255, 255, 255, .22)
+    }
+
+    .lb-close {
+      top: 26px;
+      right: 26px
+    }
+
+    .lb-prev {
+      left: 26px;
+      top: 50%;
+      transform: translateY(-50%)
+    }
+
+    .lb-next {
+      right: 26px;
+      top: 50%;
+      transform: translateY(-50%)
+    }
+
+    @media (max-width:980px) {
+      .gallery-grid {
+        columns: 2
+      }
+    }
+
+    @media (max-width:640px) {
+      .gallery-grid {
+        columns: 1
+      }
+
+      .lb-prev {
+        left: 10px
+      }
+
+      .lb-next {
+        right: 10px
+      }
+    }
+
+    .brand-text {
+      line-height: 1.1
+    }
+
+    .brand-text .bn {
+      font-family: var(--display);
+      font-weight: 600;
+      font-size: 20px;
+      letter-spacing: .2px
+    }
+
+    .brand-text .bt {
+      font-size: 10.5px;
+      letter-spacing: 3.4px;
+      text-transform: uppercase;
+      color: var(--stone);
+      font-weight: 500;
+      margin-top: 2px
+    }
+
+    .brand-text .bt b {
+      color: var(--blue);
+      font-weight: 600
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      list-style: none
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--ink-soft);
+      font-size: 14.5px;
+      font-weight: 500;
+      padding: 9px 16px;
+      border-radius: 99px;
+      position: relative;
+      transition: color .25s, background .25s;
+      letter-spacing: .2px;
+      cursor: pointer;
+    }
+
+    .nav-links a:hover {
+      background: var(--paper-warm)
+    }
+
+    .nav-links a.active {
+      color: var(--paper);
+      background: var(--ink)
+    }
+
+    .nav-cta {
+      margin-left: 14px;
+      background: var(--red);
+      color: #fff !important;
+      border-radius: 99px;
+      padding: 10px 22px !important;
+      font-weight: 600;
+      box-shadow: 0 6px 18px rgba(226, 58, 54, .3);
+      transition: transform .25s, box-shadow .25s !important;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(226, 58, 54, .4);
+      background: var(--red) !important
+    }
+
+    .burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: 0;
+      cursor: pointer;
+      padding: 8px
+    }
+
+    .burger span {
+      width: 24px;
+      height: 2.5px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: .3s
+    }
+
+    .burger.open span:nth-child(1) {
+      transform: translateY(7.5px) rotate(45deg)
+    }
+
+    .burger.open span:nth-child(2) {
+      opacity: 0
+    }
+
+    .burger.open span:nth-child(3) {
+      transform: translateY(-7.5px) rotate(-45deg)
+    }
+
+    /* ---------- Pages ---------- */
+    .page {
+      display: none;
+      animation: pageIn .55s cubic-bezier(.22, 1, .36, 1)
+    }
+
+    .page.show {
+      display: block
+    }
+
+    @keyframes pageIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    main {
+      padding-top: 74px
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 32px
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: var(--stone);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--red), var(--gold));
+      border-radius: 2px
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--display);
+      font-weight: 500;
+      line-height: 1.08
+    }
+
+    .lede {
+      color: var(--stone);
+      font-size: 18.5px;
+      font-weight: 300;
+      max-width: 560px
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: var(--paper)
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(900px 500px at 85% -10%, rgba(29, 155, 216, .08), transparent 60%),
+        radial-gradient(700px 480px at -5% 110%, rgba(242, 167, 27, .09), transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 48px;
+      align-items: center;
+      min-height: calc(100vh - 74px);
+      padding: 60px 0 80px;
+      position: relative;
+    }
+
+    .hero-copy .eyebrow {
+      margin-bottom: 26px
+    }
+
+    .hero h1 {
+      font-size: clamp(46px, 6.2vw, 84px);
+      letter-spacing: -1px;
+      margin-bottom: 8px
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 400;
+      position: relative;
+      white-space: nowrap
+    }
+
+    .hero h1 em .swash {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 14px;
+      pointer-events: none;
+    }
+
+    .hero p.lede {
+      margin: 26px 0 38px
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 99px;
+      padding: 15px 30px;
+      font-weight: 600;
+      font-size: 15.5px;
+      text-decoration: none;
+      cursor: pointer;
+      border: 0;
+      font-family: var(--body);
+      transition: transform .25s, box-shadow .25s, background .25s;
+      letter-spacing: .2px;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 10px 26px rgba(20, 30, 44, .22)
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(20, 30, 44, .3)
+    }
+
+    .btn-primary .arrow {
+      transition: transform .25s
+    }
+
+    .btn-primary:hover .arrow {
+      transform: translateX(4px)
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--ink);
+      border: 1.5px solid var(--line)
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--ink);
+      transform: translateY(-3px)
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 44px;
+      margin-top: 54px;
+      flex-wrap: wrap
+    }
+
+    .stat .num {
+      font-family: var(--display);
+      font-size: 36px;
+      font-weight: 600;
+      letter-spacing: -.5px
+    }
+
+    .stat .num i {
+      font-style: normal;
+      color: var(--red)
+    }
+
+    .stat .lbl {
+      font-size: 12.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--stone);
+      font-weight: 500;
+      margin-top: 2px
+    }
+
+    /* hero drawing panel */
+    .hero-art {
+      position: relative
+    }
+
+    .hero-art .frame {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #1a2638 0%, #141e2c 55%, #101824 100%);
+      box-shadow: 0 40px 90px rgba(20, 30, 44, .35);
+      clip-path: polygon(0 0, 100% 0, 100% 88%, 86% 100%, 0 100%);
+    }
+
+    .hero-art svg.room {
+      display: block;
+      width: 100%;
+      height: auto
+    }
+
+    .room .draw {
+      fill: none;
+      stroke: #cfe3f2;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-dasharray: 1200;
+      stroke-dashoffset: 1200;
+      opacity: .95;
+      animation: draw 2.6s cubic-bezier(.4, 0, .2, 1) forwards;
+    }
+
+    .room .draw.c-red {
+      stroke: var(--red)
+    }
+
+    .room .draw.c-blue {
+      stroke: var(--blue)
+    }
+
+    .room .draw.c-gold {
+      stroke: var(--gold)
+    }
+
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0
+      }
+    }
+
+    .hero-art .tag {
+      position: absolute;
+      bottom: 26px;
+      left: 26px;
+      background: rgba(250, 250, 248, .95);
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, .25);
+      animation: floaty 5s ease-in-out infinite;
+    }
+
+    .hero-art .tag .ribbon {
+      width: 40px
+    }
+
+    .hero-art .tag .t1 {
+      font-weight: 600;
+      font-size: 14.5px;
+      line-height: 1.3
+    }
+
+    .hero-art .tag .t2 {
+      font-size: 12px;
+      color: var(--stone)
+    }
+
+    @keyframes floaty {
+
+      0%,
+      100% {
+        transform: translateY(0)
+      }
+
+      50% {
+        transform: translateY(-9px)
+      }
+    }
+
+    .hero-art .chip {
+      position: absolute;
+      top: 26px;
+      right: -14px;
+      background: var(--gold);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 11px 18px;
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(242, 167, 27, .45);
+      transform: rotate(3deg);
+    }
+
+    /* marquee */
+    .marquee {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--paper-warm);
+      overflow: hidden;
+      padding: 18px 0;
+      position: relative;
+    }
+
+    .marquee .track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: scrollx 36s linear infinite
+    }
+
+    .marquee:hover .track {
+      animation-play-state: paused
+    }
+
+    .mi {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      padding: 0 26px;
+      white-space: nowrap;
+      font-family: var(--display);
+      font-size: 19px;
+      font-style: italic;
+      color: var(--ink-soft)
+    }
+
+    .mi::after {
+      content: "✦";
+      font-style: normal;
+      font-size: 13px
+    }
+
+    .mi:nth-child(4n+1)::after {
+      color: var(--blue)
+    }
+
+    .mi:nth-child(4n+2)::after {
+      color: var(--red)
+    }
+
+    .mi:nth-child(4n+3)::after {
+      color: var(--gold)
+    }
+
+    .mi:nth-child(4n)::after {
+      color: var(--stone)
+    }
+
+    @keyframes scrollx {
+      to {
+        transform: translateX(-50%)
+      }
+    }
+
+    /* ---------- Sections shared ---------- */
+    section {
+      padding: 96px 0
+    }
+
+    .sec-head {
+      margin-bottom: 54px
+    }
+
+    .sec-head h2 {
+      font-size: clamp(34px, 4vw, 52px);
+      margin-top: 18px;
+      letter-spacing: -.5px
+    }
+
+    .sec-head .lede {
+      margin-top: 16px
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .7s cubic-bezier(.22, 1, .36, 1), transform .7s cubic-bezier(.22, 1, .36, 1)
+    }
+
+    .reveal.in {
+      opacity: 1;
+      transform: none
+    }
+
+    /* ---------- Home: pillars ---------- */
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px
+    }
+
+    .pillar {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 34px 30px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .35s, box-shadow .35s;
+    }
+
+    .pillar::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--pc, var(--blue));
+      transform: scaleX(.18);
+      transform-origin: left;
+      transition: transform .45s;
+    }
+
+    .pillar:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 26px 50px rgba(20, 30, 44, .1)
+    }
+
+    .pillar:hover::before {
+      transform: scaleX(1)
+    }
+
+    .pillar .ic {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      background: color-mix(in srgb, var(--pc, var(--blue)) 12%, white);
+    }
+
+    .pillar .ic svg {
+      width: 26px;
+      height: 26px;
+      stroke: var(--pc, var(--blue))
+    }
+
+    .pillar h3 {
+      font-size: 23px;
+      margin-bottom: 10px
+    }
+
+    .pillar p {
+      color: var(--stone);
+      font-size: 15.5px
+    }
+
+    /* ---------- Home: dark band ---------- */
+    .band {
+      background: var(--ink);
+      color: var(--paper);
+      position: relative;
+      overflow: hidden;
+      clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+      padding: 130px 0;
+    }
+
+    .band::after {
+      content: "";
+      position: absolute;
+      right: -120px;
+      top: -120px;
+      width: 480px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29, 155, 216, .18), transparent 65%);
+    }
+
+    .band-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      position: relative;
+      z-index: 1
+    }
+
+    .band h2 {
+      font-size: clamp(32px, 3.6vw, 48px);
+      letter-spacing: -.5px
+    }
+
+    .band .eyebrow {
+      color: #9fb0c6
+    }
+
+    .band p {
+      color: #aebacb;
+      font-weight: 300;
+      margin-top: 18px;
+      font-size: 17.5px
+    }
+
+    .qlist {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 8px
+    }
+
+    .q {
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+
+    .q:last-child {
+      border-bottom: 0
+    }
+
+    .q .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      flex: none;
+      margin-top: 8px
+    }
+
+    .q:nth-child(1) .dot {
+      background: var(--blue)
+    }
+
+    .q:nth-child(2) .dot {
+      background: var(--red)
+    }
+
+    .q:nth-child(3) .dot {
+      background: var(--gold)
+    }
+
+    .q h4 {
+      font-family: var(--display);
+      font-size: 20px;
+      font-weight: 500;
+      margin-bottom: 5px
+    }
+
+    .q p {
+      font-size: 15px;
+      margin: 0;
+      color: #9aa7ba
+    }
+
+    /* ---------- CTA strip ---------- */
+    .cta-strip {
+      padding: 110px 0;
+      text-align: center;
+      position: relative
+    }
+
+    .cta-strip h2 {
+      font-size: clamp(34px, 4.4vw, 58px);
+      letter-spacing: -.5px;
+      max-width: 760px;
+      margin: 18px auto 0
+    }
+
+    .cta-strip h2 em {
+      font-style: italic;
+      font-weight: 400;
+      color: var(--red)
+    }
+
+    .cta-strip p {
+      margin: 20px auto 36px
+    }
+
+    .cta-strip .lede {
+      max-width: 520px
+    }
+
+    /* ---------- About ---------- */
+    .about-hero {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 60px;
+      align-items: start
+    }
+
+    .about-hero .big {
+      font-size: clamp(30px, 3.4vw, 46px);
+      letter-spacing: -.4px
+    }
+
+    .about-hero .big em {
+      font-style: italic;
+      color: var(--blue);
+      font-weight: 400
+    }
+
+    .about-body p {
+      color: var(--ink-soft);
+      font-weight: 300;
+      font-size: 17.5px;
+      margin-bottom: 18px
+    }
+
+    .about-body p b {
+      font-weight: 600
+    }
+
+    .fact-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .fact {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--fc, var(--blue));
+      border-radius: 16px;
+      padding: 22px 26px;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .fact:hover {
+      transform: translateX(6px);
+      box-shadow: 0 16px 36px rgba(20, 30, 44, .08)
+    }
+
+    .fact h4 {
+      font-family: var(--display);
+      font-size: 20px;
+      margin-bottom: 4px
+    }
+
+    .fact p {
+      color: var(--stone);
+      font-size: 15px;
+      margin: 0
+    }
+
+    .vm-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 70px
+    }
+
+    .vm {
+      border-radius: 22px;
+      padding: 46px 42px;
+      position: relative;
+      overflow: hidden;
+      color: var(--paper);
+      clip-path: polygon(0 0, 100% 0, 100% 86%, 92% 100%, 0 100%);
+    }
+
+    .vm.vision {
+      background: linear-gradient(150deg, #1a2c45, #141e2c)
+    }
+
+    .vm.mission {
+      background: linear-gradient(150deg, #3c2117, #27160f)
+    }
+
+    .vm .eyebrow {
+      color: rgba(255, 255, 255, .55)
+    }
+
+    .vm h3 {
+      font-size: 30px;
+      margin: 16px 0 14px
+    }
+
+    .vm p {
+      color: rgba(255, 255, 255, .78);
+      font-weight: 300;
+      font-size: 16.5px
+    }
+
+    .vm .glyph {
+      position: absolute;
+      right: -30px;
+      bottom: -40px;
+      font-family: var(--display);
+      font-size: 200px;
+      line-height: 1;
+      opacity: .07;
+      font-style: italic
+    }
+
+    .value-band {
+      margin-top: 70px;
+      background: var(--paper-warm);
+      border: 1px solid var(--line);
+      border-radius: 26px;
+      padding: 54px;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .value-band h3 {
+      font-size: clamp(26px, 2.6vw, 36px)
+    }
+
+    .value-band h3 em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .value-band .vp p {
+      color: var(--ink-soft);
+      font-weight: 300;
+      margin-bottom: 16px
+    }
+
+    .trust-chips {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 26px
+    }
+
+    .tc {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 9px 18px;
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: .4px
+    }
+
+    .tc i {
+      font-style: normal;
+      margin-right: 7px
+    }
+
+    /* ---------- Services ---------- */
+    .svc-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px
+    }
+
+    .svc {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform .35s, box-shadow .35s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .svc:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 30px 56px rgba(20, 30, 44, .12)
+    }
+
+    .svc .head {
+      padding: 30px 28px 24px;
+      background: linear-gradient(140deg, color-mix(in srgb, var(--sc) 14%, white), #fff);
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+
+    .svc .head::after {
+      content: attr(data-n);
+      position: absolute;
+      right: 22px;
+      top: 18px;
+      font-family: var(--display);
+      font-style: italic;
+      font-size: 42px;
+      color: color-mix(in srgb, var(--sc) 32%, transparent);
+    }
+
+    .svc .head .ic {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      background: var(--sc);
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 20px color-mix(in srgb, var(--sc) 40%, transparent)
+    }
+
+    .svc .head .ic svg {
+      width: 23px;
+      height: 23px;
+      stroke: #fff
+    }
+
+    .svc h3 {
+      font-size: 22px
+    }
+
+    .svc .head p {
+      color: var(--stone);
+      font-size: 14.5px;
+      margin-top: 6px
+    }
+
+    .svc ul {
+      list-style: none;
+      padding: 22px 28px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      flex: 1
+    }
+
+    .svc li {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 15px;
+      color: var(--ink-soft)
+    }
+
+    .svc li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 2px;
+      background: var(--sc);
+      flex: none;
+      transform: rotate(45deg)
+    }
+
+    .svc-note {
+      margin-top: 54px;
+      border-radius: 22px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 42px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 3% 100%, 0 72%);
+    }
+
+    .svc-note h3 {
+      font-size: 26px
+    }
+
+    .svc-note h3 em {
+      font-style: italic;
+      color: var(--gold)
+    }
+
+    .svc-note p {
+      color: #aebacb;
+      font-weight: 300;
+      margin-top: 8px;
+      max-width: 560px
+    }
+
+    /* ---------- Clients ---------- */
+    .client-marquee {
+      margin: 0 0 60px
+    }
+
+    .sector-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px
+    }
+
+    .sector {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 34px 34px 28px;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .sector:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 44px rgba(20, 30, 44, .09)
+    }
+
+    .sector .sec-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 12px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--kc);
+      margin-bottom: 18px;
+    }
+
+    .sector .sec-tag::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--kc)
+    }
+
+    .sector ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px
+    }
+
+    .sector li {
+      background: var(--paper-warm);
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      padding: 8px 16px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      transition: border-color .25s, transform .25s;
+    }
+
+    .sector li:hover {
+      border-color: var(--kc);
+      transform: translateY(-2px)
+    }
+
+    .client-count {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+      text-align: center;
+    }
+
+    .cc {
+      border-top: 3px solid var(--ccc, var(--blue));
+      padding-top: 20px
+    }
+
+    .cc .num {
+      font-family: var(--display);
+      font-size: 44px;
+      font-weight: 600;
+      letter-spacing: -1px
+    }
+
+    .cc .lbl {
+      font-size: 12.5px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--stone);
+      font-weight: 600;
+      margin-top: 4px
+    }
+
+    /* ---------- Contact ---------- */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 10px
+    }
+
+    .loc {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+    }
+
+    .loc:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 26px 52px rgba(20, 30, 44, .1)
+    }
+
+    .loc::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--blue), var(--red), var(--gold))
+    }
+
+    .loc .city {
+      font-family: var(--display);
+      font-size: 30px;
+      margin-bottom: 4px
+    }
+
+    .loc .role {
+      font-size: 12.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--stone);
+      font-weight: 700;
+      margin-bottom: 24px
+    }
+
+    .loc address {
+      font-style: normal;
+      color: var(--ink-soft);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 24px
+    }
+
+    .loc .row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 13px;
+      font-weight: 500;
+      font-size: 15.5px
+    }
+
+    .loc .row svg {
+      width: 19px;
+      height: 19px;
+      flex: none;
+      stroke: var(--red)
+    }
+
+    .loc .row a {
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--line);
+      transition: border-color .25s
+    }
+
+    .loc .row a:hover {
+      border-color: var(--red)
+    }
+
+    .contact-cta {
+      margin-top: 60px;
+      background: linear-gradient(140deg, #1a2c45, #141e2c);
+      border-radius: 26px;
+      color: var(--paper);
+      padding: 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-cta::before,
+    .contact-cta::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(2px)
+    }
+
+    .contact-cta::before {
+      width: 340px;
+      height: 340px;
+      left: -120px;
+      bottom: -160px;
+      background: radial-gradient(circle, rgba(242, 167, 27, .2), transparent 65%)
+    }
+
+    .contact-cta::after {
+      width: 340px;
+      height: 340px;
+      right: -120px;
+      top: -160px;
+      background: radial-gradient(circle, rgba(226, 58, 54, .2), transparent 65%)
+    }
+
+    .contact-cta h2 {
+      font-size: clamp(30px, 3.6vw, 46px);
+      position: relative;
+      z-index: 1
+    }
+
+    .contact-cta p {
+      color: #aebacb;
+      margin: 16px auto 34px;
+      max-width: 520px;
+      font-weight: 300;
+      position: relative;
+      z-index: 1
+    }
+
+    .contact-cta .btn {
+      position: relative;
+      z-index: 1
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--ink);
+      box-shadow: 0 12px 30px rgba(242, 167, 27, .35)
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 38px rgba(242, 167, 27, .45)
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: var(--ink);
+      color: #8fa0b6;
+      padding: 64px 0 36px;
+      margin-top: 0
+    }
+
+    .foot-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 50px;
+      align-items: start
+    }
+
+    .foot-brand .bn {
+      font-family: var(--display);
+      color: var(--paper);
+      font-size: 24px;
+      font-weight: 600
+    }
+
+    .foot-brand .bt {
+      font-size: 11px;
+      letter-spacing: 3.4px;
+      text-transform: uppercase;
+      margin-top: 4px
+    }
+
+    .foot-brand p {
+      font-weight: 300;
+      font-size: 15px;
+      margin-top: 18px;
+      max-width: 340px
+    }
+
+    footer h5 {
+      color: var(--paper);
+      font-size: 13px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      font-weight: 600
+    }
+
+    footer ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 11px
+    }
+
+    footer a {
+      color: #8fa0b6;
+      text-decoration: none;
+      font-size: 15px;
+      transition: color .25s;
+      cursor: pointer
+    }
+
+    footer a:hover {
+      color: var(--gold)
+    }
+
+    .foot-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      margin-top: 50px;
+      padding-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13.5px;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .foot-ribbon {
+      display: flex;
+      gap: 5px
+    }
+
+    .foot-ribbon i {
+      width: 26px;
+      height: 4px;
+      border-radius: 2px;
+      display: block
+    }
+
+    .foot-ribbon i:nth-child(1) {
+      background: var(--blue)
+    }
+
+    .foot-ribbon i:nth-child(2) {
+      background: var(--red)
+    }
+
+    .foot-ribbon i:nth-child(3) {
+      background: var(--gold)
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:980px) {
+
+      .hero-grid,
+      .band-grid,
+      .about-hero,
+      .vm-grid,
+      .value-band,
+      .contact-grid,
+      .svc-grid {
+        grid-template-columns: 1fr
+      }
+
+      .svc-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .pillars {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .sector-grid {
+        grid-template-columns: 1fr
+      }
+
+      .client-count {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .foot-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .hero-grid {
+        min-height: 0;
+        padding: 54px 0 64px
+      }
+    }
+
+    @media (max-width:740px) {
+      .nav-links {
+        position: fixed;
+        top: 74px;
+        left: 0;
+        right: 0;
+        background: var(--paper);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px 24px 26px;
+        gap: 4px;
+        border-bottom: 1px solid var(--line);
+        transform: translateY(-12px);
+        opacity: 0;
+        pointer-events: none;
+        transition: .3s;
+        box-shadow: 0 30px 50px rgba(20, 30, 44, .12);
+      }
+
+      .nav-links.open {
+        transform: none;
+        opacity: 1;
+        pointer-events: auto
+      }
+
+      .nav-links a {
+        padding: 13px 16px;
+        font-size: 16px
+      }
+
+      .nav-cta {
+        margin-left: 0;
+        text-align: center;
+        justify-content: center;
+        display: flex
+      }
+
+      .burger {
+        display: flex
+      }
+
+      .pillars,
+      .svc-grid {
+        grid-template-columns: 1fr
+      }
+
+      .hero h1 {
+        font-size: clamp(40px, 11vw, 56px)
+      }
+
+      section {
+        padding: 70px 0
+      }
+
+      .value-band,
+      .contact-cta,
+      .svc-note {
+        padding: 34px 26px
+      }
+
+      .wrap {
+        padding: 0 22px
+      }
+
+      .hero-art .chip {
+        right: 10px
+      }
+
+      .foot-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important
+      }
+
+      .room .draw {
+        stroke-dashoffset: 0
+      }
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
+      border-radius: 8px
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a class="brand" data-go="home">
+        <img class="brand-mark brand-img" src="assets/logo.jpeg" alt="Krishna Interiors logo"
+          onerror="this.style.display='none';document.getElementById('logoFallback').style.display='block'">
+        <svg class="brand-mark" id="logoFallback" style="display:none" viewBox="0 0 40 50" fill="none"
+          aria-hidden="true">
+          <path d="M8 4 C16 12 16 20 8 28 C4 32 4 38 8 44" stroke="#1d9bd8" stroke-width="6" stroke-linecap="round" />
+          <path d="M30 4 C18 14 18 22 30 30" stroke="#e23a36" stroke-width="6" stroke-linecap="round" />
+          <path d="M14 14 C24 18 26 26 20 36 C18 40 20 44 24 46" stroke="#f2a71b" stroke-width="6"
+            stroke-linecap="round" />
+        </svg>
+        <span class="brand-text">
+          <span class="bn">Krishna Interiors</span><br>
+          <span class="bt">Design · <b>Decor</b> · Style</span>
+        </span>
+      </a>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a data-go="home" class="active">Home</a></li>
+        <li><a data-go="about">About</a></li>
+        <li><a data-go="services">Services</a></li>
+        <li><a data-go="clients">Clients</a></li>
+        <li><a data-go="work">Our Work</a></li>
+        <li><a data-go="contact">Contact</a></li>
+        <li><a data-go="contact" class="nav-cta">Get a quote</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ============ HOME ============ -->
+    <div class="page show" id="page-home">
+      <header class="hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Interior contractors</span>
+            <h1>Spaces that<br><em>speak for you<svg class="swash" viewBox="0 0 300 14" preserveAspectRatio="none"
+                  aria-hidden="true">
+                  <path d="M2 10 Q150 -6 298 8" fill="none" stroke="#e23a36" stroke-width="4" stroke-linecap="round" />
+                </svg></em></h1>
+            <p class="lede">From the blueprint to the final brushstroke — homes, hospitals, campuses and offices,
+              crafted end-to-end in our own manufacturing units.</p>
+            <div class="hero-actions">
+              <a class="btn btn-primary" data-go="contact">Start your project <span class="arrow">→</span></a>
+              <a class="btn btn-ghost" data-go="services">Explore services</a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat">
+                <div class="num"><span data-count="40">0</span><i>+</i></div>
+                <div class="lbl">Clients served</div>
+              </div>
+              <div class="stat">
+                <div class="num"><span data-count="2">0</span></div>
+                <div class="lbl">Manufacturing units</div>
+              </div>
+              <div class="stat">
+                <div class="num"><span data-count="20">0</span><i>+</i></div>
+                <div class="lbl">Specialisations</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-art">
+            <div class="frame">
+              <!-- self-drawing line-art interior, echoing the brochure cover -->
+              <svg class="room" viewBox="0 0 560 430" aria-label="Line drawing of an interior space">
+                <!-- room perspective -->
+                <path class="draw" style="animation-delay:.1s" d="M40 90 L280 50 L520 90 L520 360 L280 400 L40 360 Z" />
+                <path class="draw" style="animation-delay:.4s" d="M40 90 L40 360 M520 90 L520 360 M280 50 L280 120" />
+                <!-- back wall window -->
+                <path class="draw c-blue" style="animation-delay:.7s"
+                  d="M210 120 h140 v120 h-140 Z M280 120 v120 M210 180 h140" />
+                <!-- sofa -->
+                <path class="draw" style="animation-delay:1s" d="M90 290 q0 -26 26 -26 h120 q26 0 26 26 v34 h-172 Z" />
+                <path class="draw" style="animation-delay:1.2s" d="M104 264 v-22 q0 -14 14 -14 h96 q14 0 14 -14 v0" />
+                <path class="draw c-gold" style="animation-delay:1.35s" d="M118 268 h54 M180 268 h44" />
+                <!-- coffee table -->
+                <path class="draw" style="animation-delay:1.5s"
+                  d="M300 330 a44 14 0 1 0 88 0 a44 14 0 1 0 -88 0 M308 336 v22 M380 336 v22" />
+                <!-- floor lamp -->
+                <path class="draw c-red" style="animation-delay:1.7s" d="M452 340 v-130 l-20 -26 h44 Z" />
+                <!-- pendant light -->
+                <path class="draw c-gold" style="animation-delay:1.9s" d="M280 50 v54 m-16 0 h32 l-8 18 h-16 Z" />
+                <!-- wall art -->
+                <path class="draw c-red" style="animation-delay:2.05s"
+                  d="M96 150 h70 v54 h-70 Z M108 188 l18 -20 14 12 16 -18" />
+                <!-- rug -->
+                <path class="draw c-blue" style="animation-delay:2.2s" d="M150 364 q130 26 270 -6 q-120 -20 -270 6 Z" />
+                <!-- shelf right -->
+                <path class="draw" style="animation-delay:2.35s"
+                  d="M400 150 h84 M400 188 h84 M408 150 v-16 m24 16 v-22 m26 22 v-12" />
+              </svg>
+              <div class="tag">
+                <span class="ribbon" aria-hidden="true"><span></span><span></span><span></span></span>
+                <span><span class="t1">Blueprint → handover</span><br><span class="t2">One team, every
+                    touchpoint</span></span>
+              </div>
+            </div>
+            <div class="chip">Own mfg. units</div>
+          </div>
+        </div>
+
+        <div class="marquee" aria-hidden="true">
+          <div class="track" id="marqueeTrack">
+            <span class="mi">Modular Kitchens</span><span class="mi">Toughened Glass</span><span class="mi">False
+              Ceilings</span><span class="mi">UPVC Windows</span><span class="mi">Wood Works</span><span
+              class="mi">Aluminium Partitions</span><span class="mi">Texture Painting</span><span
+              class="mi">Wardrobes</span><span class="mi">Spider Fittings</span><span class="mi">Workstations</span>
+          </div>
+        </div>
+      </header>
+
+      <section>
+        <div class="wrap">
+          <div class="sec-head reveal">
+            <span class="eyebrow">Why Krishna Interiors</span>
+            <h2>One roof. Every craft.</h2>
+            <p class="lede">Most projects juggle five vendors. Ours need one — because design, fabrication and finishing
+              all live in-house.</p>
+          </div>
+          <div class="pillars">
+            <article class="pillar reveal" style="--pc:var(--blue)">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M3 21h18M5 21V7l7-4 7 4v14M9 21v-6h6v6M9 11h.01M15 11h.01" />
+                </svg></div>
+              <h3>In-house manufacturing</h3>
+              <p>UPVC windows, shelters and modular kitchen cupboards built in our own units at Vijayawada and Bangalore
+                — quality we control, not outsource.</p>
+            </article>
+            <article class="pillar reveal" style="--pc:var(--red)">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3" />
+                  <circle cx="12" cy="12" r="3.5" />
+                </svg></div>
+              <h3>Blueprint-phase partnership</h3>
+              <p>We join before the first wall goes up — even helping shape the core idea — so the design intent
+                survives all the way to handover.</p>
+            </article>
+            <article class="pillar reveal" style="--pc:var(--gold)">
+              <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V6l-8-3-8 3v6c0 6 8 10 8 10z" />
+                  <path d="M9 12l2 2 4-4" />
+                </svg></div>
+              <h3>Trusted across sectors</h3>
+              <p>Hospitals, universities, government departments, airports and homes — institutions that audit
+                everything keep choosing us back.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="wrap band-grid">
+          <div class="reveal">
+            <span class="eyebrow">How we work</span>
+            <h2>No leg work left for you.</h2>
+            <p>Our team brings together every aspect of the project — raw materials, labour, quality control and timely
+              delivery — and walks you through every touchpoint along the way.</p>
+          </div>
+          <div class="qlist reveal">
+            <div class="q"><span class="dot"></span>
+              <div>
+                <h4>Listen &amp; sketch</h4>
+                <p>We interpret your vision into design expressions that are distinctive and practical.</p>
+              </div>
+            </div>
+            <div class="q"><span class="dot"></span>
+              <div>
+                <h4>Fabricate in-house</h4>
+                <p>Glass, UPVC, woodwork and modular units produced under our own roof.</p>
+              </div>
+            </div>
+            <div class="q"><span class="dot"></span>
+              <div>
+                <h4>Deliver on time</h4>
+                <p>Competitive pricing, tight timelines, and a finish that combines function with innovation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-strip">
+        <div class="wrap reveal">
+          <span class="eyebrow" style="justify-content:center">Ready when you are</span>
+          <h2>Your walls are waiting for a <em>better idea.</em></h2>
+          <p class="lede" style="margin-left:auto;margin-right:auto">Tell us about the space. We'll bring the design,
+            the craftsmen and the deadline discipline.</p>
+          <a class="btn btn-primary" data-go="contact">Talk to our team <span class="arrow">→</span></a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ ABOUT ============ -->
+    <div class="page" id="page-about">
+      <section>
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="eyebrow">About us</span>
+            <h2>We are Krishna Interiors.</h2>
+          </div>
+          <div class="about-hero">
+            <div class="about-body reveal">
+              <p class="big" style="font-family:var(--display);margin-bottom:26px">A well-established interiors firm
+                where <em>every craft lives under one roof.</em></p>
+              <p>Krishna Interiors offers home and office furniture along with complete interior solutions for
+                <b>government organisations, laboratories, pharma &amp; healthcare establishments, education &amp;
+                  training institutes, auditoriums, sports clubs and stadiums.</b>
+              </p>
+              <p>Our services span the taking up and execution of furniture works, false ceilings, partitions, aluminium
+                works, Venetian &amp; vertical blinds, paintings and a wide range of other interior works.</p>
+              <p>We are experts in all types of shelters and customised <b>UPVC windows</b> and <b>modular kitchen
+                  cupboards</b> — made in our own manufacturing units located in <b>Vijayawada and Bangalore.</b></p>
+            </div>
+            <div class="fact-stack">
+              <div class="fact reveal" style="--fc:var(--blue)">
+                <h4>Two manufacturing units</h4>
+                <p>Vijayawada &amp; Bangalore — fabrication stays in our hands.</p>
+              </div>
+              <div class="fact reveal" style="--fc:var(--red)">
+                <h4>Institutional pedigree</h4>
+                <p>Hospitals, universities, airports and government bodies on the client list.</p>
+              </div>
+              <div class="fact reveal" style="--fc:var(--gold)">
+                <h4>End-to-end delivery</h4>
+                <p>Design, materials, labour, QC and handover — one accountable team.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="vm-grid">
+            <article class="vm vision reveal">
+              <span class="glyph">V</span>
+              <span class="eyebrow">Our vision</span>
+              <h3>The most progressive interior contractor.</h3>
+              <p>To interpret and translate a client's vision into design expressions that are both distinctive and
+                practical — delivering service excellence to a wide range of customers, and leveraging years of
+                professional experience to consistently deliver exclusive design services.</p>
+            </article>
+            <article class="vm mission reveal">
+              <span class="glyph">M</span>
+              <span class="eyebrow">Our mission</span>
+              <h3>Foremost in interior works.</h3>
+              <p>The best level of customer service, on-time delivery, all at a competitive price — creating rewarding
+                experiences and value that combine functionality with high quality and innovation for our customers.</p>
+            </article>
+          </div>
+
+          <div class="value-band reveal">
+            <div>
+              <span class="eyebrow">Value proposition</span>
+              <h3 style="margin-top:16px">One-stop solution. <em>Zero leg work.</em></h3>
+              <div class="trust-chips">
+                <span class="tc"><i>🤝</i>Trust</span>
+                <span class="tc"><i>📋</i>Commitment</span>
+                <span class="tc"><i>✦</i>Integrity</span>
+              </div>
+            </div>
+            <div class="vp">
+              <p>Our biggest advantage is that we offer a one-stop solution for all interior decor needs. We work with
+                you right from the blueprint phase — and can even assist in shaping the core idea of the project.</p>
+              <p>Trust is the foundation of any client–architect relationship. When we make a value proposition, we
+                deliver — a top interior design consulting experience with impressive client service throughout, always
+                adding value to the trust our clients place in us.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ SERVICES ============ -->
+    <div class="page" id="page-services">
+      <section>
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="eyebrow">What we do</span>
+            <h2>Specialised in the details.</h2>
+            <p class="lede">Six families of craft, dozens of specialisations — each executed by our own teams and units.
+            </p>
+          </div>
+
+          <div class="svc-grid">
+            <article class="svc reveal" style="--sc:var(--blue)">
+              <div class="head" data-n="01">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M3 12h18M12 3v18" />
+                  </svg></div>
+                <h3>Glass Works</h3>
+                <p>Strength, clarity and drama in equal measure.</p>
+              </div>
+              <ul>
+                <li>Toughened glass</li>
+                <li>Laminated glass</li>
+                <li>DGU glass</li>
+                <li>Shower cubicles</li>
+                <li>Spider fittings</li>
+                <li>Automatic glass doors</li>
+                <li>Switch film glass</li>
+                <li>Glass colour designs</li>
+                <li>Lacquered glass</li>
+              </ul>
+            </article>
+
+            <article class="svc reveal" style="--sc:var(--red)">
+              <div class="head" data-n="02">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="4" y="3" width="16" height="18" rx="1.5" />
+                    <path d="M12 3v18M4 12h16" />
+                  </svg></div>
+                <h3>UPVC</h3>
+                <p>Made in our own units — sized to your opening.</p>
+              </div>
+              <ul>
+                <li>Windows</li>
+                <li>Doors</li>
+                <li>French doors</li>
+                <li>Customised shelters</li>
+              </ul>
+            </article>
+
+            <article class="svc reveal" style="--sc:var(--gold)">
+              <div class="head" data-n="03">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M3 4h18M3 20h18M7 4v16M17 4v16" />
+                  </svg></div>
+                <h3>Partitions</h3>
+                <p>Divide the space, not the light.</p>
+              </div>
+              <ul>
+                <li>Aluminium partitions</li>
+                <li>Wooden partitions</li>
+                <li>Gypsum board</li>
+                <li>Bison board</li>
+              </ul>
+            </article>
+
+            <article class="svc reveal" style="--sc:#7a5cc9">
+              <div class="head" data-n="04">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M3 9l9-6 9 6M5 9v11h14V9M9 14h6" />
+                  </svg></div>
+                <h3>Ceilings</h3>
+                <p>The fifth wall, finally given its due.</p>
+              </div>
+              <ul>
+                <li>Gypsum ceilings</li>
+                <li>POP ceilings</li>
+                <li>Grid ceilings</li>
+                <li>False ceilings</li>
+              </ul>
+            </article>
+
+            <article class="svc reveal" style="--sc:#1fa57a">
+              <div class="head" data-n="05">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                      d="M19 3H5a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM12 11v4M10 15h4l-1 6h-2l-1-6z" />
+                  </svg></div>
+                <h3>Painting Works</h3>
+                <p>Texture, tone and finishes that last.</p>
+              </div>
+              <ul>
+                <li>Textures</li>
+                <li>Texture paint</li>
+                <li>Royale Play</li>
+                <li>Wallcare</li>
+              </ul>
+            </article>
+
+            <article class="svc reveal" style="--sc:#c2562c">
+              <div class="head" data-n="06">
+                <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <rect x="3" y="6" width="18" height="14" rx="1.5" />
+                    <path d="M3 13h18M8 6V4h8v2M8 16.5h.01M16 16.5h.01" />
+                  </svg></div>
+                <h3>Woodwork &amp; Modular</h3>
+                <p>Furniture and fitted storage, built to the millimetre.</p>
+              </div>
+              <ul>
+                <li>Wood works</li>
+                <li>Modern TV units</li>
+                <li>Modular cupboards</li>
+                <li>Modular kitchens</li>
+                <li>Wardrobes</li>
+                <li>Workstations</li>
+                <li>Furnishing &amp; blinds</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="svc-note reveal">
+            <div>
+              <h3>Don't see your requirement? <em>We probably still do it.</em></h3>
+              <p>From auditorium seating to laboratory fit-outs, our teams take up varied interior works across homes,
+                offices and institutions.</p>
+            </div>
+            <a class="btn btn-gold" data-go="contact">Ask us <span class="arrow">→</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ CLIENTS ============ -->
+    <div class="page" id="page-clients">
+      <section style="padding-bottom:0">
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="eyebrow">Our clients</span>
+            <h2>Trusted where standards are strict.</h2>
+            <p class="lede">Hospitals that can't close, universities that can't compromise, and government departments
+              that audit everything.</p>
+          </div>
+        </div>
+        <div class="marquee client-marquee" aria-hidden="true">
+          <div class="track" id="clientTrack">
+            <span class="mi">Rainbow Children's Hospital</span><span class="mi">Vijayawada International
+              Airport</span><span class="mi">Bombay Dyeing</span><span class="mi">Religare</span><span class="mi">NTR
+              Health University</span><span class="mi">Morris Garages</span><span class="mi">HCG Cancer
+              Hospitals</span><span class="mi">GSL Medical College</span><span class="mi">Zauba Corp</span><span
+              class="mi">SIMS Group of Institutions</span>
+          </div>
+        </div>
+        <div class="wrap">
+          <div class="sector-grid">
+            <article class="sector reveal" style="--kc:var(--red)">
+              <span class="sec-tag">Healthcare</span>
+              <ul>
+                <li>Rainbow Children's Hospital</li>
+                <li>BirthRight by Rainbow</li>
+                <li>HCG Cancer Hospitals, Vijayawada</li>
+                <li>Aayush Hospitals</li>
+                <li>NORI Multi Speciality Hospital</li>
+                <li>Anil Neuro &amp; Trauma Centre</li>
+                <li>Mallika Spine Centre</li>
+                <li>Vijaya Hospitals, Rajamahendravaram</li>
+                <li>Sanjeevani Hospitals, Kuchipudi</li>
+              </ul>
+            </article>
+            <article class="sector reveal" style="--kc:var(--blue)">
+              <span class="sec-tag">Education &amp; Institutions</span>
+              <ul>
+                <li>NTR Health University</li>
+                <li>GSL Medical College, Rajahmundry</li>
+                <li>Sri Krishna Devaraya University, Ananthapur</li>
+                <li>SIMS Group of Institutions</li>
+                <li>ASRES</li>
+              </ul>
+            </article>
+            <article class="sector reveal" style="--kc:var(--gold)">
+              <span class="sec-tag">Government &amp; Infrastructure</span>
+              <ul>
+                <li>Vijayawada International Airport, Gannavaram</li>
+                <li>Commercial Taxes Dept., Govt. of A.P.</li>
+                <li>The District Collectorate, Ongole</li>
+                <li>Kakinada Municipal Corporation</li>
+                <li>APCFMS, Ibrahimpatnam</li>
+                <li>AP TRICOR, Vijayawada</li>
+              </ul>
+            </article>
+            <article class="sector reveal" style="--kc:#1fa57a">
+              <span class="sec-tag">Business &amp; Hospitality</span>
+              <ul>
+                <li>Bombay Dyeing</li>
+                <li>Religare</li>
+                <li>Morris Garages, Gudavalli</li>
+                <li>B-Logic Infotech</li>
+                <li>Zauba Corp</li>
+                <li>PC Technology</li>
+                <li>Raj Jewellers, Kakinada</li>
+                <li>Jain Jewellery Mall, Kakinada</li>
+                <li>Devi Sea Food</li>
+                <li>Deepika Builders, Guntur</li>
+                <li>Sree Suchitra Constructions</li>
+                <li>Shree Balaji Constructions</li>
+                <li>VRRC Infra Pvt Ltd</li>
+                <li>Aakarshan Intex India Pvt Ltd</li>
+                <li>CSR Residency, Tadepalli</li>
+                <li>Deepika Restaurant</li>
+                <li>Hang Out, Vijayawada</li>
+                <li>Our Place, Tadepalli</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="client-count">
+            <div class="cc reveal" style="--ccc:var(--red)">
+              <div class="num"><span data-count="9">0</span></div>
+              <div class="lbl">Healthcare clients</div>
+            </div>
+            <div class="cc reveal" style="--ccc:var(--blue)">
+              <div class="num"><span data-count="5">0</span></div>
+              <div class="lbl">Institutions</div>
+            </div>
+            <div class="cc reveal" style="--ccc:var(--gold)">
+              <div class="num"><span data-count="6">0</span></div>
+              <div class="lbl">Govt. bodies</div>
+            </div>
+            <div class="cc reveal" style="--ccc:#1fa57a">
+              <div class="num"><span data-count="18">0</span></div>
+              <div class="lbl">Businesses</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-strip">
+        <div class="wrap reveal">
+          <h2>The next name on this wall <em>could be yours.</em></h2>
+          <p class="lede" style="margin-left:auto;margin-right:auto">Join the institutions and homes that trust Krishna
+            Interiors.</p>
+          <a class="btn btn-primary" data-go="contact">Get in touch <span class="arrow">→</span></a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ OUR WORK ============ -->
+    <div class="page" id="page-work">
+      <section>
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="eyebrow">Our work</span>
+            <h2>Proof, in pictures.</h2>
+            <p class="lede">A look at completed projects — kitchens, ceilings, glass, partitions and full fit-outs
+              across homes and institutions.</p>
+          </div>
+          <div class="filters" id="filters"></div>
+          <div class="gallery-grid" id="galleryGrid"></div>
+          <div class="gallery-empty" id="galleryEmpty" style="display:none">
+            <h3>Your project photos go here.</h3>
+            <p>Drop your photos into the <code>gallery/images/</code> folder (use sub-folders like
+              <code>kitchens</code>, <code>ceilings</code>, <code>glass</code> to auto-categorise), then run
+              <code>python3 update_gallery.py</code> in the project folder. Refresh this page and they'll appear — no
+              code edits needed.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta-strip" style="padding-top:20px">
+        <div class="wrap reveal">
+          <h2>Like what you see? <em>Let's make yours.</em></h2>
+          <a class="btn btn-primary" data-go="contact" style="margin-top:26px">Start your project <span
+              class="arrow">→</span></a>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ CONTACT ============ -->
+    <div class="page" id="page-contact">
+      <section>
+        <div class="wrap">
+          <div class="sec-head">
+            <span class="eyebrow">Contact</span>
+            <h2>Two cities. One standard.</h2>
+            <p class="lede">Walk into either office, or simply call — we'll come to the site.</p>
+          </div>
+
+          <div class="contact-grid">
+            <article class="loc reveal">
+              <div class="city">Vijayawada</div>
+              <div class="role">Head office</div>
+              <address>
+                D No: 54-16-7/6B, Plot No: 87,<br>
+                Loyola Gardens,<br>
+                Opp. Loyola College Main Gate,<br>
+                Vijayawada – 520008
+              </address>
+              <div class="row">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <span><a href="tel:+919966008787">+91 99660 08787</a> · <a href="tel:+919949767777">+91 99497
+                    67777</a></span>
+              </div>
+              <div class="row">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-10 6L2 7" />
+                </svg>
+                <span><a href="mailto:krishnainteriordesigns@gmail.com">krishnainteriordesigns@gmail.com</a></span>
+              </div>
+            </article>
+            <!-- 
+            <article class="loc reveal">
+              <div class="city">Rajahmundry</div>
+              <div class="role">Branch office</div>
+              <address>
+                D No: 79-18-20, First Floor,<br>
+                Omkar Street,<br>
+                KFC Beside Lane,<br>
+                Rajahmundry – 533101
+              </address>
+              <div class="row">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <span><a href="tel:+919550102768">+91 95501 02768</a> · <a href="tel:+917569804018">+91 75698
+                    04018</a></span>
+              </div>
+              <div class="row">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-10 6L2 7" />
+                </svg>
+                <span><a href="mailto:krishnainteriordesigns@gmail.com">krishnainteriordesigns@gmail.com</a></span>
+              </div>
+            </article>
+            -->
+          </div>
+
+          <div class="contact-cta reveal">
+            <h2>Tell us about your space.</h2>
+            <p>A home, a hospital wing, a campus block or a corner office — share the brief and we'll respond with a
+              plan, a price and a timeline.</p>
+            <a class="btn btn-gold" href="mailto:krishnainteriordesigns@gmail.com">Write to us <span
+                class="arrow">→</span></a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-grid">
+        <div class="foot-brand">
+          <div class="bn">Krishna Interiors</div>
+          <div class="bt">Design · Decor · Style</div>
+          <p>A one-stop interior contractor with own manufacturing units in Vijayawada and Bangalore — serving homes,
+            healthcare, education and government across Andhra Pradesh and beyond.</p>
+        </div>
+        <div>
+          <h5>Explore</h5>
+          <ul>
+            <li><a data-go="home">Home</a></li>
+            <li><a data-go="about">About</a></li>
+            <li><a data-go="services">Services</a></li>
+            <li><a data-go="clients">Clients</a></li>
+            <li><a data-go="work">Our Work</a></li>
+            <li><a data-go="contact">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5>Reach us</h5>
+          <ul>
+            <li><a href="tel:+919966008787">+91 99660 08787</a></li>
+            <li><a href="tel:+919949767777">+91 99497 67777</a></li>
+            <li><a href="mailto:krishnainteriordesigns@gmail.com">krishnainteriordesigns@gmail.com</a></li>
+            <li><a href="https://www.krishnainteriors.co" target="_blank" rel="noopener">www.krishnainteriors.co</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span id="yr"></span> Krishna Interiors. All rights reserved.</span>
+        <span class="foot-ribbon" aria-hidden="true"><i></i><i></i><i></i></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="gallery/gallery.js"></script>
+  <script>
+    // ---------- SPA navigation ----------
+    const pages = document.querySelectorAll('.page');
+    const links = document.querySelectorAll('[data-go]');
+    const navLinks = document.getElementById('navLinks');
+    const burger = document.getElementById('burger');
+
+    function go(id) {
+      pages.forEach(p => p.classList.toggle('show', p.id === 'page-' + id));
+      document.querySelectorAll('.nav-links a[data-go]').forEach(a => {
+        a.classList.toggle('active', a.dataset.go === id && !a.classList.contains('nav-cta'));
+      });
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      navLinks.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      // re-trigger reveals & counters on the new page
+      requestAnimationFrame(observeAll);
+      // restart hero drawing when returning home
+      if (id === 'home') {
+        document.querySelectorAll('.room .draw').forEach(el => {
+          el.style.animation = 'none'; void el.offsetWidth;
+          el.style.animation = '';
+        });
+      }
+    }
+    links.forEach(a => a.addEventListener('click', e => { e.preventDefault?.(); go(a.dataset.go); }));
+
+    burger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open);
+    });
+
+    // ---------- nav shadow ----------
+    const nav = document.getElementById('nav');
+    addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 8), { passive: true });
+
+    // ---------- scroll reveal + counters ----------
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          en.target.querySelectorAll?.('[data-count]:not(.done)').forEach(runCount);
+          if (en.target.matches?.('[data-count]:not(.done)')) runCount(en.target);
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: .18 });
+
+    function runCount(el) {
+      el.classList.add('done');
+      const target = +el.dataset.count, dur = 1300, t0 = performance.now();
+      (function tick(t) {
+        const p = Math.min((t - t0) / dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+
+    function observeAll() {
+      document.querySelectorAll('.page.show .reveal:not(.in)').forEach(el => io.observe(el));
+      document.querySelectorAll('.page.show [data-count]:not(.done)').forEach(el => io.observe(el));
+    }
+    observeAll();
+
+    // ---------- duplicate marquee tracks for seamless loop ----------
+    ['marqueeTrack', 'clientTrack'].forEach(id => {
+      const t = document.getElementById(id);
+      if (t) t.innerHTML += t.innerHTML;
+    });
+
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // ---------- Dynamic gallery ----------
+    // Photos are listed in gallery/gallery.js (auto-generated by update_gallery.py).
+    // Format: window.GALLERY = [{src:"gallery/images/kitchens/k1.jpg", title:"Modular kitchen", category:"Kitchens"}, ...]
+    (function initGallery() {
+      const grid = document.getElementById('galleryGrid');
+      const empty = document.getElementById('galleryEmpty');
+      const filterBar = document.getElementById('filters');
+      const items = (window.GALLERY || []).filter(g => g && g.src);
+
+      if (!items.length) { empty.style.display = 'block'; return; }
+
+      // filter chips from categories
+      const cats = ['All', ...new Set(items.map(g => g.category || 'Projects'))];
+      cats.forEach((c, i) => {
+        const b = document.createElement('button');
+        b.className = 'fbtn' + (i === 0 ? ' active' : '');
+        b.textContent = c;
+        b.onclick = () => {
+          filterBar.querySelectorAll('.fbtn').forEach(x => x.classList.remove('active'));
+          b.classList.add('active');
+          grid.querySelectorAll('.gitem').forEach(el => {
+            el.classList.toggle('hidden', c !== 'All' && el.dataset.cat !== c);
+          });
+        };
+        filterBar.appendChild(b);
+      });
+
+      // grid
+      items.forEach((g, idx) => {
+        const d = document.createElement('div');
+        d.className = 'gitem';
+        d.dataset.cat = g.category || 'Projects';
+        d.innerHTML = `<img src="${g.src}" alt="${g.title || 'Krishna Interiors project'}" loading="lazy">
+      <div class="cap"><div class="cc">${g.category || 'Project'}</div><div class="ct">${g.title || ''}</div></div>`;
+        d.onclick = () => openLB(idx);
+        grid.appendChild(d);
+      });
+
+      // lightbox
+      const lb = document.createElement('div');
+      lb.className = 'lightbox';
+      lb.innerHTML = `<button class="lb-close" aria-label="Close">✕</button>
+    <button class="lb-prev" aria-label="Previous">‹</button>
+    <img alt=""><button class="lb-next" aria-label="Next">›</button>
+    <div class="lb-cap"></div>`;
+      document.body.appendChild(lb);
+      const lbImg = lb.querySelector('img'), lbCap = lb.querySelector('.lb-cap');
+      let cur = 0;
+      function openLB(i) { cur = i; render(); lb.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function closeLB() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+      function render() {
+        const g = items[cur];
+        lbImg.src = g.src; lbImg.alt = g.title || '';
+        lbCap.innerHTML = `<b>${g.title || ''}</b>${g.category ? ' · ' + g.category : ''} &nbsp;<span style="opacity:.55">${cur + 1} / ${items.length}</span>`;
+      }
+      lb.querySelector('.lb-close').onclick = closeLB;
+      lb.querySelector('.lb-prev').onclick = e => { e.stopPropagation(); cur = (cur - 1 + items.length) % items.length; render(); };
+      lb.querySelector('.lb-next').onclick = e => { e.stopPropagation(); cur = (cur + 1) % items.length; render(); };
+      lb.onclick = e => { if (e.target === lb) closeLB(); };
+      addEventListener('keydown', e => {
+        if (!lb.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLB();
+        if (e.key === 'ArrowLeft') lb.querySelector('.lb-prev').click();
+        if (e.key === 'ArrowRight') lb.querySelector('.lb-next').click();
+      });
+    })();
+  </script>
+</body>
+
+</html>
