@@ -125,7 +125,13 @@
     }
 
     .brand-img {
-      object-fit: contain
+      object-fit: contain;
+      animation: brandSpin 6s linear infinite;
+    }
+
+    @keyframes brandSpin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
     }
 
     /* ---------- Our Work / Gallery ---------- */
