@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#b1872c"/><stop offset="1" stop-color="#5b430f"/></linearGradient></defs>
+<rect width="800" height="520" fill="url(#g)"/>
+<g fill="none" stroke="rgba(255,255,255,.55)" stroke-width="3" stroke-linecap="round">
+<ellipse cx="400" cy="200" rx="260" ry="90"/><ellipse cx="400" cy="200" rx="170" ry="56"/><circle cx="260" cy="320" r="10"/><circle cx="400" cy="335" r="10"/><circle cx="540" cy="320" r="10"/>
+</g>
+<text x="40" y="0" />
+<text x="400" y="474" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="30" fill="rgba(255,255,255,.92)">Gypsum False Ceiling</text>
+<text x="400" y="502" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" letter-spacing="4" fill="rgba(255,255,255,.6)">SAMPLE — REPLACE WITH YOUR PHOTO</text>
+</svg>
